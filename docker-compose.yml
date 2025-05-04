@@ -1,0 +1,23 @@
+services:
+  db:
+    container_name: auth-db
+    image: docker.io/bitnami/postgresql:17
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - "auth:/bitnami/postgresql"
+    environment:
+      - POSTGRESQL_USERNAME=auth
+      - POSTGRESQL_PASSWORD=auth
+      - POSTGRESQL_DATABASE=auth
+      - ALLOW_EMPTY_PASSWORD=no
+    networks:
+      - auth
+
+networks:
+  auth:
+    driver: bridge
+
+volumes:
+  auth:
+    driver: local
